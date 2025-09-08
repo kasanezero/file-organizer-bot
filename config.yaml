@@ -1,0 +1,47 @@
+# Example configuration for File Organizer Bot
+#
+# Adjust the following fields to match your environment. The bot will move files from
+# `source_dir` into subfolders under `target_dir` based on the rules defined below.
+
+# Where to pull files from and where to put organized results
+source_dir: "/path/to/Downloads"
+target_dir: "/path/to/Sorted"
+
+# Optional: date bucketing for some categories
+# modes: none | year | year_month
+#   none        -> Images/<filename>
+#   year        -> Images/2025/<filename>
+#   year_month  -> Images/2025/09/<filename>
+
+bucket_mode: year_month
+
+# Top‑level default for unknown extensions
+unknown_category: "Other"
+
+# Static extension mapping (case‑insensitive)
+extensions:
+  Images: [jpg, jpeg, png, gif, webp, bmp, tiff, heic]
+  Docs:   [pdf, doc, docx, xls, xlsx, ppt, pptx, csv, txt, md]
+  Archives: [zip, rar, 7z, tar, gz, bz2]
+  Audio:  [mp3, wav, flac, m4a, aac, ogg]
+  Video:  [mp4, mkv, avi, mov, webm]
+  Code:   [py, js, ts, java, kt, cs, cpp, c, go, rs, sql, html, css, json, yaml, yml]
+
+# Advanced rules (optional). First matching rule wins.
+# You can route by regex on filename, limit by size, or force a folder.
+rules:
+  - name: "Screenshots by prefix"
+    if_name_regex: "(?i)^screenshot[_\\-].*"   # case-insensitive
+    to_category: "Images"
+
+  - name: "Big videos"
+    if_ext_in: [mp4, mkv, mov]
+    min_size_mb: 200
+    to_category: "Video"
+
+  - name: "Design exports"
+    if_name_regex: "(?i)^(export|final).*"
+    to_category: "Images"
+
+# Exclusions (regex). If matched, the file is skipped.
+exclude_regex: ["(?i)^~\\$.*", "(?i)^\\.~lock\\.", "(?i)\\.part$", "(?i)\\.crdownload$"]
