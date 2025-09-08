@@ -22,16 +22,6 @@ fully configurable via a YAML file so you can customise it to suit your workflow
 * **Clean, coloured console output** – Uses [rich](https://pypi.org/project/rich/) for
   nicely formatted logs (optional).
 
-## Folder layout
-
-```
-file-organizer-bot/
-├─ organizer.py        # CLI script
-├─ config.yaml         # Example configuration
-├─ .gitignore          # Ignore logs, virtual environments, etc.
-└─ .moves.log          # Auto-created: stores last run moves for undo
-```
-
 ## Requirements
 
 Python 3.7+ is required. Install optional dependencies as needed:
@@ -40,9 +30,6 @@ Python 3.7+ is required. Install optional dependencies as needed:
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install pyyaml rich watchdog
 ```
-
-Only `PyYAML` is mandatory to parse the configuration. The `rich` and `watchdog`
-packages provide enhanced output and watch mode, respectively.
 
 ## Configuration (`config.yaml`)
 
