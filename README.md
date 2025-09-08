@@ -84,10 +84,3 @@ python organizer.py --config config.yaml --dry    # preview without moving files
 python organizer.py --config config.yaml --undo   # undo the last one-shot run
 python organizer.py --config config.yaml --watch  # keep watching in real time
 ```
-
-## Autostart (optional)
-
-To run the bot continuously, you can set it up as a systemd user service on Linux or
-create a Task Scheduler entry on Windows. See the comments in the project description
-for example unit files and Task Scheduler instructions.
----
