@@ -30,18 +30,18 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 try:
-    from rich import print  # type: ignore[import]
-    from rich.table import Table  # noqa: F401  # unused here but part of optional rich import
-    from rich.console import Console  # noqa: F401
+    from rich import print  
+    from rich.table import Table  
+    from rich.console import Console  
 except Exception:
-    # rich is optional; fall back to built‑in print if not installed
+   
     pass
 
-import yaml  # type: ignore[import]
+import yaml  
 
 try:
-    from watchdog.observers import Observer  # type: ignore[import]
-    from watchdog.events import FileSystemEventHandler  # type: ignore[import]
+    from watchdog.observers import Observer  
+    from watchdog.events import FileSystemEventHandler  
     WATCHDOG_AVAILABLE = True
 except Exception:
     WATCHDOG_AVAILABLE = False
@@ -66,7 +66,7 @@ def load_config(cfg_path: Path) -> dict:
     """Load and normalize the YAML configuration file."""
     with open(cfg_path, "r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f) or {}
-    # Normalize extension lists to lowercase
+    
     if "extensions" in cfg:
         cfg["extensions"] = {k: [x.lower() for x in v] for k, v in cfg["extensions"].items()}
     return cfg
@@ -116,17 +116,17 @@ def matches_rule(p: Path, rule: Rule) -> bool:
 
 def pick_category(p: Path, cfg: dict, rules: List[Rule]) -> str:
     """Determine the destination category for a file based on rules and extension mapping."""
-    # 1) advanced rules
+    
     for r in rules:
         if matches_rule(p, r) and r.to_category:
             return r.to_category
-    # 2) extension map
+
     ext = p.suffix.lower().lstrip(".")
     ext_map: Dict[str, List[str]] = cfg.get("extensions", {})
     for cat, exts in ext_map.items():
         if ext in exts:
             return cat
-    # 3) fallback
+   
     return cfg.get("unknown_category", "Other")
 
 
@@ -175,7 +175,7 @@ def move_file(src: Path, dest: Path, dry: bool, moved: List[Tuple[Path, Path]]):
         print(f"[yellow]DRY[/yellow] {src} → {final}")
     else:
         shutil.move(str(src), str(final))
-        moved.append((final, src))  # store reverse order for undo
+        moved.append((final, src))  
         print(f"[green]MOVED[/green] {src} → {final}")
 
 
@@ -257,7 +257,7 @@ class _Handler(FileSystemEventHandler):
         cat = pick_category(p, self.cfg, self.rules)
         dest_dir = with_date_bucket(self.tgt, cat, self.cfg, p)
         dest = dest_dir / p.name
-        move_file(p, dest, self.dry, moved=[])  # per-file moves are not logged for undo in watch mode
+        move_file(p, dest, self.dry, moved=[])  
 
 
 def run_watch(cfg: dict, dry: bool = False):
