@@ -1,0 +1,13 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+
+# Move log file
+.moves.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
