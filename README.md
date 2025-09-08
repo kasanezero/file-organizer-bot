@@ -1,6 +1,6 @@
 # File Organizer Bot
 
-A small, cross‑platform bot that tidies a folder automatically using rules (by extension,
+A  cross‑platform bot that tidies a folder automatically using rules (by extension,
 name patterns, size, and creation date). You can run it as a one‑shot command or as a
 background watcher that keeps your download folder organised in real time. The project is
 fully configurable via a YAML file so you can customise it to suit your workflow.
@@ -103,18 +103,4 @@ python organizer.py --config config.yaml --watch  # keep watching in real time
 To run the bot continuously, you can set it up as a systemd user service on Linux or
 create a Task Scheduler entry on Windows. See the comments in the project description
 for example unit files and Task Scheduler instructions.
-
-## Next ideas
-
-Some enhancements you might consider:
-
-* Send notifications via Telegram/Discord summarising each batch.
-* Detect true duplicates by content hash and move them to a `Duplicates/` folder.
-* Watch for incomplete `.crdownload` files and process them only when they finish.
-* Create a simple GUI using CustomTkinter for drag‑and‑drop configuration and live logs.
-* Add per‑category post‑processing (e.g. automatically unzip archives or convert
-  images).
-
 ---
-
-*This project is released under the MIT License.*
